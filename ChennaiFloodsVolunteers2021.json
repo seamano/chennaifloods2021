@@ -478,5 +478,6 @@
         "UnavailableDays":  "",
         "AvailableHours":  "5pm - 10pm;10pm - 2am",
         "UnavailableHours":  ""
-    },
+    }
 ]
+
