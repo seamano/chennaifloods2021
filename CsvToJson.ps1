@@ -56,7 +56,7 @@ $recs = @(Get-CsvRecords -FileName:$InputCsvFile)
 if ($recs.Length -gt 0)
 {
 	write-host -fore cyan "Converting $($recs.Count) records to $OutputJsonFile"
-	$recs | ConvertTo-Json | out-string | out-file -Encoding:utf8 $OutputJsonFile
+	$recs | ConvertTo-Json | out-string | out-file -Encoding:Ascii $OutputJsonFile
 }
 
 #	}
