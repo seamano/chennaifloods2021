@@ -20,9 +20,18 @@ function Get-CsvRecords
 		}
 		$o.Phone = $csv.MobileNumber
 
-		if ($csv.LatLong -and $csv.LatLong.ToString().Trim() -ne "")
+		$isLatLngValid = $false
+		if (($csv.LatLongToBeVerified -eq 0) -and $csv.LatLong)
 		{
-			$p = $csv.LatLong.Split(",").Trim()
+			$tmpLatLng = $csv.LatLong.ToString().Trim()
+			if ($tmpLatLng -imatch "^\d+")
+			{
+				$isLatLngValid = $true
+			}
+		}
+		if ($isLatLngValid)
+		{
+			$p = $tmpLatLng.Split(",").Trim()
 			$o.Lat = [double] $p[0]
 			$o.Lng = [double] $p[1]
 
@@ -39,7 +48,7 @@ function Get-CsvRecords
 		}
 		else
 		{
-			write-host -fore yellow "No LatLong specified. Skipping #$($o.SerialNumber)"
+			write-host -fore yellow "No LatLong specified or not valid. Skipping #$($o.SerialNumber)"
 		}
 	}
 }
